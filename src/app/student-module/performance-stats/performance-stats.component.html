@@ -1,0 +1,42 @@
+<h1 class="h1">Performance Stats</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/student', 'subject']">My Subjects</a>
+  </li>
+  <li>Performance Stats</li>
+</ul>
+
+<div class="chart-container">
+  <!-- Chat widgets begin here -->
+  <div class="chart-widget">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Attendance Record</mat-card-title>
+        <mat-card-subtitle>How Many Classes Did the Student Attend</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content #attendanceChart>
+        <!-- <plotly-plot [data]="graph.data" [layout]="graph.layout" [useResizeHandler]="true"></plotly-plot> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- Chat widgets end here -->
+
+  <!-- Chat widgets begin here -->
+  <div class="chart-widget">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Subject Strength</mat-card-title>
+        <mat-card-subtitle>What subject is this student strong in?</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content #subjectStrengthChart>
+        <!-- <plotly-plot [data]="graph.data" [layout]="graph.layout" [useResizeHandler]="true"></plotly-plot> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- Chat widgets end here -->
+
+</div>

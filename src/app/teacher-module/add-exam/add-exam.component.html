@@ -1,0 +1,129 @@
+<h1 class="h1">Create Exam</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    Add Exam
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="addExamForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'">
+            <mat-option *ngFor="let subj of (subjectList$ | async)"
+              [value]="subj.Id">
+              {{subj.Name }}({{ subj.ClassCategory }})
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('subject').touched
+                                        && addExamForm.get('subject').invalid">
+          <span *ngIf="addExamForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Exam Type</mat-label>
+          <mat-select [formControlName]="'examType'">
+            <mat-option *ngFor="let examType of (examTypes$ | async)"
+             [value]="examType.Value">
+            {{examType.Name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('examType').touched
+                                        && addExamForm.get('examType').invalid">
+          <span *ngIf="addExamForm.get('examType').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Allocated Time</mat-label>
+          <mat-select [formControlName]="'allocatedTime'">
+            <mat-option *ngFor="let allocatedTime of (allocatedTimes$ | async)"
+            [value]="allocatedTime.Value">
+            {{allocatedTime.Name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('allocatedTime').touched
+                                        && addExamForm.get('allocatedTime').invalid">
+          <span *ngIf="addExamForm.get('allocatedTime').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput
+            [min]="minDate"
+            [matDatepickerFilter]="myFilter"
+            [matDatepicker]="picker"
+            [formControlName]="'startDate'"/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('startDate').touched
+          && addExamForm.get('startDate').invalid">
+          <span *ngIf="addExamForm.get('startDate').errors['required']">
+          This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Time</mat-label>
+        <input matInput placeholder="Time" [formControlName]="'startTime'">
+        <mat-icon matSuffix>access_time</mat-icon>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('startTime').touched
+          && addExamForm.get('startTime').invalid">
+          <span *ngIf="addExamForm.get('startTime').errors['required']">
+          This field is required
+          </span>
+          <span *ngIf="addExamForm.get('startTime').errors['pattern']">
+            This field must match this pattern I.E 11:40AM
+          </span>
+      </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Total Expected Score</mat-label>
+        <input matInput
+            placeholder="Total Expected Score"
+            [formControlName]="'totalExpectedScore'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="addExamForm.get('totalExpectedScore').touched
+          && addExamForm.get('totalExpectedScore').invalid">
+          <span *ngIf="addExamForm.get('totalExpectedScore').errors['required']">
+          This field is required
+          </span>
+          <span *ngIf="addExamForm.get('startTime').errors['pattern']">
+            This field must be a number
+          </span>
+      </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+            [disabled]="addExamForm.invalid"
+            mat-raised-button color="primary">Post</button>
+    </p>
+  </form>
+</div>

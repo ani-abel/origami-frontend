@@ -1,0 +1,28 @@
+<div class="form-container video-container">
+  <video id="video" #videoPlayer>
+    Stream not available
+  </video>
+</div>
+
+<div class="form-container">
+  <div class="time-left">
+    <mat-icon color="primary">timer</mat-icon>
+    <h2 class="h2">{{ formattedTime }}</h2>
+  </div>
+
+  <mat-divider></mat-divider>
+  <br />
+
+  <form>
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button [disabled]="time === 0"
+        type="button"
+        (click)="submitForm()"
+        mat-raised-button
+        color="primary"
+        #submitBtn>Submit</button>
+    </p>
+  </form>
+</div>

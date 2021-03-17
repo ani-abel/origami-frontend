@@ -1,0 +1,29 @@
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-test', 'view-tests']">
+      View CA Tests
+    </a>
+  </li>
+  <li>
+    View Test Submissions
+  </li>
+  <li>
+    View Test Submission
+  </li>
+</ul>
+<div class="full-width" *ngIf="caTestSubmissionId && totalScoreExpected">
+  <a mat-raised-button color="accent" (click)="openDialog()">
+    <mat-icon>grade</mat-icon> Grade
+  </a>
+</div>
+
+<app-pdf-document-preview
+        *ngIf="attachedFileUrl; else defaultTemplate"
+        [fileURL]="attachedFileUrl"></app-pdf-document-preview>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

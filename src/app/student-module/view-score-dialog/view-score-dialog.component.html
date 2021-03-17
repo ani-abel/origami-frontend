@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{ data.purpose | uppercase }} SCORE</h1>
+<div mat-dialog-content *ngIf="score; else defaultTemplate">
+  <h2 color="accent">You scored {{ score }} / {{ data.totalExpectedScore }}</h2>
+  <div *ngIf="remark">
+    <h3 [ngClass]="['text-amber']">Teacher's Remarks</h3>
+    <p [ngClass]="['remark-text']">{{ remark }}</p>
+  </div>
+</div>
+
+<ng-template #defaultTemplate>
+  <div mat-dialog-content>
+    <h2 color="accent">Grade has not been posted</h2>
+  </div>
+</ng-template>

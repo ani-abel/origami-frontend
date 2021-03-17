@@ -1,0 +1,7 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!hideSpinner; else default"></mat-progress-bar>
+
+<ng-template #default>
+  <div class="content-holder">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

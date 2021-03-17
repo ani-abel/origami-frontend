@@ -1,0 +1,25 @@
+<h1 class="h1">Exam Tracking Images</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-exam', 'view-exams']">View Exams</a>
+  </li>
+  <li>
+    Track Exam Participants
+  </li>
+  <li>
+    Exam Tracking Images
+  </li>
+</ul>
+<div class="form-container" *ngIf="(imageUrlList$ | async)?.length > 0; else defaultTemplate">
+  <mat-card *ngFor="let image of (imageUrlList$ | async)"
+   (click)="openImageDialog(image.Url)">
+    <img [src]="image.Url"/>
+  </mat-card>
+</div>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

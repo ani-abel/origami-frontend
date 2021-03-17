@@ -1,0 +1,19 @@
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-note', 'view-notes']">
+      View Notes
+    </a>
+  </li>
+  <li>View Note</li>
+</ul>
+
+<app-pdf-document-preview
+        *ngIf="attachedFileUrl; else defaultTemplate"
+        [fileURL]="attachedFileUrl"></app-pdf-document-preview>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

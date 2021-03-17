@@ -1,0 +1,62 @@
+/* Stying for participant sidebar */
+.sidebar {
+  width: 350px;
+  background: #fff;
+  bottom: 0;
+  right: 0;
+  height: 90vh;
+  position: fixed;
+  z-index: 999;
+  padding-top: 10px;
+}
+
+.sidebar .sidebar-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.sidebar .sidebar-container button {
+  width: 100%;
+  display: block;
+}
+.sidebar .sidebar-container .participants-list-container {
+  padding: 20px 0 0 0;
+  height: 100%;
+  /* overflow-y: scroll; */
+}
+
+.display-inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.sidebar .participant-widget {
+  padding: 10px 5px;
+  margin-bottom: 10px;
+}
+
+.sidebar .participant-widget h2 {
+  margin-bottom: 3px;
+}
+
+.sidebar .participant-widget h2 span {
+  font-size: 14px;
+}
+
+.active-user {
+  color: teal;
+}
+
+.inactive-user {
+  color: #FF4081;
+}
+
+.sidebar .participant-widget img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}

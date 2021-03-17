@@ -1,0 +1,70 @@
+<h1 class="h1">Update Teacher Profile</h1>
+<!-- Breadcrumbs (Begin) -->
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/admin', 'manage-teachers']">Manage Teachers</a>
+  </li>
+  <li>
+    Update Teacher
+  </li>
+</ul>
+<!-- Breadcrumbs (Begin) -->
+
+<div class="form-container">
+  <form [formGroup]="updateTeacherForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [formControlName]="'firstName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateTeacherForm.get('firstName').touched
+                                        && updateTeacherForm.get('firstName').invalid">
+          <span *ngIf="updateTeacherForm.get('firstName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControlName]="'lastName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateTeacherForm.get('lastName').touched
+                                        && updateTeacherForm.get('lastName').invalid">
+          <span *ngIf="updateTeacherForm.get('lastName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Email(Username)</mat-label>
+        <input matInput placeholder="Email(Username)" [formControlName]="'email'">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateTeacherForm.get('email').touched
+                                        && updateTeacherForm.get('email').invalid">
+          <span *ngIf="updateTeacherForm.get('email').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="updateTeacherForm.get('email').errors['email']">
+            This field must be a valid Email address
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit"
+          [disabled]="updateTeacherForm.invalid"
+          mat-raised-button
+          color="primary">Submit</button>
+    </p>
+  </form>
+</div>

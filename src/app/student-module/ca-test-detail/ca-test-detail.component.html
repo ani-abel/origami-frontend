@@ -1,0 +1,60 @@
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/student', 'ca-test']">My CA Tests</a>
+  </li>
+  <li>CA Test</li>
+</ul>
+
+<main *ngIf="!caTestNotDue; else upcomingEventTemplate">
+  <section *ngIf="attachedCATestFileURL; else defaultTemplate">
+    <h1 class="h1">CA Test</h1>
+    <div class="p-date">
+      <button color="accent" mat-raised-button (click)="openBottomSheet()">Details</button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <app-pdf-document-preview [fileURL]="attachedCATestFileURL"></app-pdf-document-preview>
+
+    <div class="p-date" *ngIf="!attachedCATestSubmissionFileURL">
+      <button mat-raised-button color="accent" (click)="toggleTakeTest()">
+        <mat-icon>schedule</mat-icon> Take Test
+      </button>
+    </div>
+  </section>
+
+  <ng-template #defaultTemplate>
+    <app-no-content-found></app-no-content-found>
+  </ng-template>
+
+  <!-- Component for adding ca-test submissions -->
+  <section *ngIf="takeTest">
+    <mat-divider></mat-divider>
+    <br />
+
+    <h2 class="h1">Take CA Test</h2>
+    <app-ca-test-submission
+      [caTestId]="caTestId"
+      [allocatedTime]="allocatedTimeForTest"
+      (caTestSubmitted)="caTestSubmitted($event)">
+    </app-ca-test-submission>
+    <br />
+  </section>
+
+  <!-- Component for viewing ca-tests solutions that have already been submitted -->
+  <section *ngIf="attachedCATestSubmissionFileURL">
+    <mat-divider></mat-divider>
+    <br />
+
+    <h2 class="h1">Submission</h2>
+
+    <app-pdf-document-preview [fileURL]="attachedCATestSubmissionFileURL"></app-pdf-document-preview>
+  </section>
+</main>
+
+<ng-template #upcomingEventTemplate>
+  <app-upcoming-event-date [eventStartDate]="caTestStartDate"></app-upcoming-event-date>
+</ng-template>

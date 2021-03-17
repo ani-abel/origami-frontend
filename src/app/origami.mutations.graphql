@@ -1,0 +1,251 @@
+mutation login($data: AuthDTO!) {
+  login(payload: $data) {
+    UserId,
+    Username,
+  	Role,
+    Token,
+    TokenExpiryDate
+  }
+}
+
+mutation createSchoolClass($payload: School_Class_DTO!) {
+  createSchoolClass(payload: $payload){
+    Id,
+    Name
+  }
+}
+
+mutation deactivateSchoolClass($data: String!) {
+  deactivateSchoolClass(Id: $data) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation updateClass($data: Update_School_Class_DTO!) {
+  updateSchoolClass(payload: $data) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation assignClassToTeacher($payload: AssignTeacherToClassDTO!) {
+  assignClassToTeacher(payload: $payload){
+    Id
+  }
+}
+
+mutation assignSubjectToTeacher($payload: AssignTeacherToSubjectsDTO!) {
+  assignSubjectToTeacher(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation deleteSubject($data: String!) {
+  deactivateSubject(id: $data) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation createSubject($payload: Subject_DTO!) {
+  createSubject(payload: $payload) {
+    Name
+  }
+}
+
+mutation updateSubject($payload: Update_Subject_DTO!) {
+  updateSubject(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation registerUser($payload: PersonRegistrationDTO!) {
+  registerPerson(payload: $payload) {
+    Id
+  }
+}
+
+mutation updateUser($payload: UpdatePersonRegistrationDTO!) {
+  updatePersonDetails(updatedUser: $payload) {
+    Id
+  }
+}
+
+mutation deactivateUser($payload: String!) {
+  deactivateUserStatus(personId: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation updateUserProfileWithoutImage($payload: UpdatePersonProfileDTO!) {
+  updateUserProfileWithoutImage(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation giveSubjectAssignment($payload: GiveAssignmentTaskDTO!) {
+  giveSubjectAssignment(payload: $payload) {
+    Id
+  }
+}
+
+mutation updateSubjectAssignment($payload: UpdateAssignmentTaskDTO!) {
+  updateSubjectAssignment(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation deleteSubjectAssignment($assignmentId: String!) {
+  deleteSubjectAssignment(assignmentId: $assignmentId) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation gradeAssignment($payload: ScoreGradingDTO!) {
+  gradeAssignment(payload: $payload) {
+    Id
+  }
+}
+
+mutation gradeCATest($payload: ScoreGradingDTO!) {
+  gradeCATest(payload: $payload) {
+    Id
+  }
+}
+
+mutation gradeExam($payload: ScoreGradingDTO!) {
+  gradeExam(payload: $payload) {
+    Id
+  }
+}
+
+mutation giveSubjectExam($payload: GiveExamTaskDTO!) {
+  giveSubjectExam(payload: $payload) {
+    Id
+  }
+}
+
+mutation giveSubjectCATest($payload: GiveCATaskDTO!) {
+  giveCATest(payload: $payload) {
+    Id
+  }
+}
+
+mutation giveSubjectNote($payload: GiveSubjectNoteTaskDTO!) {
+  giveSubjectNote (payload: $payload) {
+    Id
+  }
+}
+
+mutation updateSubjectNote($payload: UpdateSubjectNoteTaskDTO!) {
+  updateSubjectNote(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation deleteSubjectNote($subjectNoteId: String!) {
+  deleteNote(subjectNoteId: $subjectNoteId) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation submitSubjectAssignment($payload: SubjectAssignmentSubmissionDTO!) {
+  submitAssignment(payload: $payload) {
+    Id
+  }
+}
+
+mutation enrollStudentForSubjects($payload: AssignTeacherToSubjectsDTO!) {
+  assignSubjectListToStudent(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation updateAssignmentGradeScore($payload: UpdateScoreDTO!) {
+  updateAssignmentGradeScore(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation updateExamGradeScore($payload: UpdateScoreDTO!) {
+  updateExamGradeScore(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation updateCATestGradeScore($payload: UpdateScoreDTO!) {
+  updateCATestGradeScore(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation createSubjectExamParticipation($examId: String!) {
+  createSubjectExamParticipation(examId: $examId) {
+    Id
+  }
+}
+
+mutation submitSubjectExam($payload: SubmitExamDTO!) {
+  submitExam(payload: $payload) {
+    Id
+  }
+}
+
+mutation saveExamScreenshot($payload: ScreenshotDTO!) {
+  saveExamScreenshot(payload: $payload) {
+    Id,
+    Url
+  }
+}
+
+mutation submitSubjectCATest($payload: SubmitExamDTO!) {
+  submitCATest(payload: $payload) {
+    Id
+  }
+}
+
+mutation saveCATestScreenshot($payload: ScreenshotDTO!) {
+  saveCATestScreenshot(payload: $payload) {
+    Id,
+    Url
+  }
+}
+
+mutation createSubjectCATestParticipation($caTestId: String!) {
+  createSubjectCAParticipation(caTestId: $caTestId) {
+    Id
+  }
+}
+
+mutation createSubjectTopic($payload: SubjectTopicDTO!) {
+  createSubjectTopic(payload: $payload) {
+    Id
+  }
+}
+
+mutation updateSubjectTopic($payload: UpdateSubjectTopicDTO!) {
+  updateSubjectTopic(payload: $payload) {
+    Message,
+    OperationStatus
+  }
+}
+
+mutation deactivateSubjectTopic($subjectTopicId: String!) {
+  deactivateSubjectTopic(subjectTopicId: $subjectTopicId) {
+    Message,
+    OperationStatus
+  }
+}

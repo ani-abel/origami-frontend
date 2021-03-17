@@ -1,0 +1,102 @@
+<h1 class="h1">Update Assignment</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-assignment', 'view-assignments']">
+      View Assignments
+    </a>
+  </li>
+  <li>
+    Update Assignment
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="updateAssignmentForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'" (selectionChange)="handleChange($event)">
+            <mat-option *ngFor="let subj of (subjectList$ | async)"
+              [value]="subj.Id">
+              {{subj.Name }}({{ subj.ClassCategory }})
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="updateAssignmentForm.get('subject').touched
+                                        && updateAssignmentForm.get('subject').invalid">
+          <span *ngIf="updateAssignmentForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Topic</mat-label>
+          <mat-select [formControlName]="'subjectTopic'">
+            <mat-option *ngFor="let topic of (topics$ | async)"
+              [value]="topic.Id">
+              {{ topic.Title }}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="updateAssignmentForm.get('subjectTopic').touched
+                                        && updateAssignmentForm.get('subjectTopic').invalid">
+          <span *ngIf="updateAssignmentForm.get('subjectTopic').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Total Expected Score</mat-label>
+        <input matInput
+            placeholder="Total Expected Score"
+            [formControlName]="'totalExpectedScore'" />
+        <mat-icon matSuffix>grade</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateAssignmentForm.get('totalExpectedScore').touched
+                                        && updateAssignmentForm.get('totalExpectedScore').invalid">
+          <span *ngIf="updateAssignmentForm.get('totalExpectedScore').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="updateAssignmentForm.get('totalExpectedScore').errors['pattern']">
+            This field must be a number
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Due Date</mat-label>
+        <input matInput
+              [min]="minDate"
+              [matDatepickerFilter]="myFilter"
+              [matDatepicker]="picker"
+              [formControlName]="'dueDate'">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint class="text-danger" *ngIf="updateAssignmentForm.get('dueDate').touched
+                                        && updateAssignmentForm.get('dueDate').invalid">
+          <span *ngIf="updateAssignmentForm.get('dueDate').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <!-- Strategy for adding an assignment. 1. Take the content of this field, base-64 encode it and then send to the server which then decode it and writes it to a pdf file using jspdf-->
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+          mat-raised-button
+          [disabled]="updateAssignmentForm.invalid"
+          color="primary">Post</button>
+    </p>
+  </form>
+</div>

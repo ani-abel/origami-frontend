@@ -1,0 +1,69 @@
+<h1 class="h1">Ongoing CA Tests</h1>
+
+<div class="form-container" *ngIf="dataSource?.length > 0; else defaultTemplate">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="S/N">
+      <th mat-header-cell *matHeaderCellDef> S/N </th>
+      <td mat-cell *matCellDef="let element"> {{element.SerialNumber}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Subject">
+      <th mat-header-cell *matHeaderCellDef> Subject </th>
+      <td mat-cell *matCellDef="let element"> {{element.Subject}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="CAType">
+      <th mat-header-cell *matHeaderCellDef> CA Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.CAType}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="DateOfCATest">
+      <th mat-header-cell *matHeaderCellDef> Start Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.SelectedDateTime | relativeTime }} </td>
+    </ng-container>
+
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="DateCreated">
+      <th mat-header-cell *matHeaderCellDef> Date Created </th>
+      <td mat-cell *matCellDef="let element"> {{element.DateCreated | relativeTime }} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="TotalMarksExpected">
+      <th mat-header-cell *matHeaderCellDef> Total Marks Expected </th>
+      <td mat-cell *matCellDef="let element">{{ element.TotalExpectedScore }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" [matMenuTriggerFor]="actionMenu">Manage</button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <a [routerLink]="['/teacher', 'manage-test', 'view-test-submissions', element.Id]"
+             mat-menu-item>
+              <mat-icon>collections</mat-icon> Submissions
+            </a>
+            <a mat-menu-item
+              [routerLink]="['/teacher', 'manage-test', 'track-test-participant', element.Id]">
+              <mat-icon>track_changes</mat-icon> View Participant Tracking
+            </a>
+          </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

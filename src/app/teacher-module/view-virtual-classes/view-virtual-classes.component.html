@@ -1,0 +1,70 @@
+<h1 class="h1">Virtual Classes</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    View Virtual Classes
+  </li>
+</ul>
+<div class="form-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> <span color="accent">Ongoing</span> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" [matMenuTriggerFor]="actionMenu">Manage</button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <a mat-menu-item>
+              <mat-icon>power_settings_new</mat-icon> Start Meeting
+            </a>
+            <a mat-menu-item [routerLink]="['/teacher', 'virtual-meeting', 'update-virtual-class', element.name]">
+              <mat-icon>edit</mat-icon> Update Meeting
+            </a>
+            <a mat-menu-item [routerLink]="['/teacher', 'virtual-meeting', 'update-virtual-class-attendance', element.name]">
+              <mat-icon>edit</mat-icon> Update Attendance
+            </a>
+            <a mat-menu-item [routerLink]="['/teacher', 'virtual-meeting', 'view-virtual-class-attendance', element.name]">
+              <mat-icon>assignment_ind</mat-icon> View Attendance
+            </a>
+          </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

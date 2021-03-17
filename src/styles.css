@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --msger-bg: #fff;
+  --border: 2px solid #ddd;
+  --left-msg-bg: #ececec;
+  --right-msg-bg: #579ffb;
+}
+
+html, body { height: 100%; overflow-x: hidden; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: whitesmoke; }
+
+:host {
+  padding: 200px 70px;
+}
+
+.h1,
+.form-container {
+  margin: 0 auto;
+}
+
+.h1 {
+  text-align: center;
+  font-size: 40px;
+  color: #3F51B5;
+  text-shadow: 2px 2px #dddddd;
+  font-family: cursive;
+}
+
+.full-width {
+  width: 100%;
+  text-align: center;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.box-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-container {
+  background: #fff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: 30vw;
+  margin-top: 50px;
+  padding: 30px 10px 20px;
+  border-left: 20px solid #3F51B5;
+  border-right: 20px solid #3F51B5;
+  border-top: 1px solid #3F51B5;
+  border-bottom: 1px solid #3F51B5;
+  border-radius: 10px;
+}
+
+.mat-form-field,
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-danger {
+  color: indianred;
+}
+
+.text-info {
+  color: #3F51B5;
+}
+
+.text-amber {
+  color: #FF4081 !important;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.anchor {
+  margin: 0 auto;
+}
+
+/* Styles the breadcrumb */
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background: #eee;
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+/* Dispkay list items side by side */
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+@media (max-width: 950px) {
+  .container {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .h1 {
+    font-size: 35px;
+  }
+
+  .form-container {
+    width: 80vw;
+  }
+}

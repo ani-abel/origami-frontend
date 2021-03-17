@@ -1,0 +1,44 @@
+<h1 class="h1">My Chatrooms</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/']">Home</a>
+  </li>
+  <li>Chat Rooms</li>
+</ul>
+
+<main [ngClass]="['form-container']">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Subjects">
+      <div [ngClass]="['container']">
+        <div [ngClass]="['chat-room-widget', 'box-shadow']"
+          *ngFor="let subject of (chatRoomList$ | async)?.Subjects">
+          <h2 [ngClass]="['inline-block', 'h2']">{{ subject.Name }}</h2>
+          <a [ngClass]="['inline-block', 'button']"
+            mat-raised-button color="accent"
+            [routerLink]="['/anonymous', 'chat-by-subject', subject.Id]"
+            [queryParams]="{ chatType: 'subject' }">
+            Join Room
+          </a>
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Classes">
+      <div [ngClass]="['container']">
+        <div [ngClass]="['chat-room-widget', 'box-shadow']"
+        *ngFor="let class of (chatRoomList$ | async)?.SchoolClasses">
+          <h2 [ngClass]="['inline-block', 'h2']">{{ class.Name }}</h2>
+          <a [ngClass]="['inline-block', 'button']"
+              mat-raised-button color="accent"
+              [routerLink]="['/anonymous', 'chat-by-subject', class.Id]"
+              [queryParams]="{ chatType: 'class' }">
+            Join Room
+          </a>
+        </div>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</main>

@@ -1,0 +1,41 @@
+<div class="form-container">
+  <iframe script-src="self" [src]="iFrameUrl" embedded=true></iframe>
+</div>
+
+<!-- <div class="form-container">
+  <div class="pdf-viewer-controls">
+    <button mat-raised-button color="accent"
+      (click)="previousPage(pageNumberSelector.value)">
+      Previous
+    </button>
+    &nbsp;&nbsp;
+    <mat-form-field appearance="outline">
+    <mat-label>Page</mat-label>
+    <input matInput
+        placeholder="Page"
+        [value]="selectedPage"
+        type="number"
+        #pageNumberSelector
+        (input)="selectNewPageNumber()">
+    <mat-icon matSuffix>find_in_page</mat-icon>
+  </mat-form-field>
+  &nbsp;&nbsp;
+  <button mat-raised-button color="accent"
+    (click)="nextPage(pageNumberSelector.value)">
+    Next
+  </button>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="pdf-preview" #pdfRenderContentContainer></div>
+
+  <div *ngIf="totalPageRatio">
+    <mat-divider></mat-divider>
+    <div class="pdf-page-count">
+      <p><span #pageCountRatio [innerHTML]="totalPageRatio"></span></p>
+    </div>
+  </div>
+
+</div> -->
+
+

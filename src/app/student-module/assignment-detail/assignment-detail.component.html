@@ -1,0 +1,47 @@
+<h1 class="h1">Assignment</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/student', 'assignment']">My Assignments</a>
+  </li>
+  <li>Assignment</li>
+</ul>
+
+<div class="p-date">
+  <button color="accent" mat-raised-button (click)="openBottomSheet()">Details</button>
+</div>
+
+<mat-divider></mat-divider>
+
+<app-pdf-document-preview *ngIf="attachedFileURL; else defaultTemplate"
+    [fileURL]="attachedFileURL"></app-pdf-document-preview>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>
+
+<!-- Component for viewing assignment solutions that have already been submitted -->
+<main *ngIf="submissionAttachmentURL">
+  <mat-divider></mat-divider>
+  <br />
+
+  <h2 class="h1">Submission</h2>
+
+  <app-pdf-document-preview [fileURL]="submissionAttachmentURL"></app-pdf-document-preview>
+</main>
+
+<!-- Component for adding assignment submissions -->
+<!-- Should only be display if the assignment has not been submitted and the assignment due date has not been reached -->
+<main *ngIf="!submissionAttachmentURL && !assignmentExpired">
+  <mat-divider></mat-divider>
+  <br />
+
+  <h2 class="h1">Add Submission</h2>
+  <app-assignment-submission
+    [assignmentId]="assignmentId"
+    (assignmentSubmitted)="assignmentWasSubmitted($event)"></app-assignment-submission>
+  <br />
+</main>

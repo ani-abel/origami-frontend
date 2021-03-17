@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>GRADE {{ data.purpose }} SUBMISSION</h1>
+<p [ngClass]="['text-info']">({{ data.totalExpectedScore }}) Marks expected</p>
+<div mat-dialog-content>
+  <form [formGroup]="gradeScoreForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Score</mat-label>
+        <input matInput placeholder="Score" [formControlName]="'score'">
+        <mat-icon matSuffix>grade</mat-icon>
+        <mat-hint [ngClass]="['text-danger']" *ngIf="gradeScoreForm.get('score').touched
+                                        && gradeScoreForm.get('score').invalid">
+          <span *ngIf="gradeScoreForm.get('score').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Remark</mat-label>
+        <textarea matInput
+            placeholder="Total Expected Score"
+            rows="5"
+            [formControlName]="'remark'"></textarea>
+        <mat-icon matSuffix>message</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit"
+            [disabled]="gradeScoreForm.invalid"
+            mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

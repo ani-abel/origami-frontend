@@ -1,0 +1,51 @@
+<h1 class="h1">Create Subject Topic</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    Add Subject Topic
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="addTopicForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Topic</mat-label>
+        <input matInput placeholder="Topic" [formControlName]="'title'">
+        <mat-icon matSuffix>topic</mat-icon>
+        <mat-hint class="text-danger" *ngIf="addTopicForm.get('title').touched
+                                        && addTopicForm.get('title').invalid">
+          <span *ngIf="addTopicForm.get('title').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'">
+            <mat-option *ngFor="let subj of (subjectList$ | async)"
+              [value]="subj.Id">
+              {{subj.Name }}({{ subj.ClassCategory }})
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addTopicForm.get('subject').touched
+                                        && addTopicForm.get('subject').invalid">
+          <span *ngIf="addTopicForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit"
+        [disabled]="addTopicForm.invalid"
+        mat-raised-button
+        color="primary">Submit</button>
+    </p>
+  </form>
+</div>

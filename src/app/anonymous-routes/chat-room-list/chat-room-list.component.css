@@ -1,0 +1,51 @@
+.form-container {
+  width: 40vw;
+}
+
+h1 {
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  color: #3F51B5;
+  text-shadow: 2px 2px #dddddd;
+  font-family: cursive;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.mat-tab {
+  padding: 10px;
+}
+
+.container {
+  width: 100%;
+  padding: 20px 10px;
+  overflow-y: hidden;
+}
+
+.container .chat-room-widget {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px 10px 8px 10px;
+  margin-bottom: 10px;
+}
+
+.h2 {
+  font-weight: 300;
+}
+
+.button {
+  float: right
+}
+
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 35px;
+  }
+}

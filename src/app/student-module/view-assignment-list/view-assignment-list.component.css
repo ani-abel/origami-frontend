@@ -1,0 +1,53 @@
+table {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  box-shadow: none;
+}
+
+
+h1 {
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  color: #3F51B5;
+  text-shadow: 2px 2px #dddddd;
+  font-family: cursive;
+}
+
+.form-container {
+  width: 70vw;
+  margin-bottom: 50px;
+}
+
+form {
+  width: 25vw;
+  margin: 0 auto;
+}
+
+.select-section {
+  width: 100%;
+}
+
+.select-section p {
+  text-align: center;
+}
+
+.select-section p .mat-form-field {
+  width: 30%;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 35px;
+  }
+
+  table,
+  .select-section p .mat-form-field {
+    width: 100%;
+  }
+}

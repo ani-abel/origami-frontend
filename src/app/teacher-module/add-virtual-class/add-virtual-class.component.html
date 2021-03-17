@@ -1,0 +1,68 @@
+<h1 class="h1">Create Virtual Class</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    Add Virtual Class
+  </li>
+</ul>
+<div class="form-container">
+  <form>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Meeting Topic</mat-label>
+        <input matInput placeholder="Topic">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Time</mat-label>
+        <input matInput placeholder="Time">
+        <mat-icon matSuffix>access_time</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

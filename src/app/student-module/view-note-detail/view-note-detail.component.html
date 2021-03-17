@@ -1,0 +1,25 @@
+<h1 class="h1">Note</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/student', 'note']">My Notes</a>
+  </li>
+  <li>Note</li>
+</ul>
+
+<main *ngIf="attachedFileURL; else defaultTemplate">
+  <div class="p-date">
+    <button color="accent" mat-raised-button (click)="openBottomSheet()">Details</button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <app-pdf-document-preview [fileURL]="attachedFileURL"></app-pdf-document-preview>
+</main>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

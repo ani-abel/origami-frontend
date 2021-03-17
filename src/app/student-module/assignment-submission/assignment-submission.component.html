@@ -1,0 +1,11 @@
+<div class="form-container">
+  <form [formGroup]="assignmentSubmissionForm" (ngSubmit)="submitForm()">
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+          [disabled]="assignmentSubmissionForm.invalid"
+          mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

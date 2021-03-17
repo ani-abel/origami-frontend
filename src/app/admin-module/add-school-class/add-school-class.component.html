@@ -1,0 +1,52 @@
+<h1 class="h1">Add Class</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    Add Class
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="createSchoolClassForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class Name</mat-label>
+        <input matInput placeholder="Class Name" [formControlName]="'className'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="createSchoolClassForm.get('className').touched
+                                        && createSchoolClassForm.get('className').invalid">
+          <span *ngIf="createSchoolClassForm.get('className').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="createSchoolClassForm.get('className').errors['minLength']">
+            This field must be > 3 characters
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class Category</mat-label>
+          <mat-select [formControlName]="'classCategory'">
+            <mat-option *ngFor="let category of (classCategorySL$ | async)"
+              [value]="category.Value">
+              {{category.Name }}
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="createSchoolClassForm.get('classCategory').touched
+                                        && createSchoolClassForm.get('classCategory').invalid">
+          <span *ngIf="createSchoolClassForm.get('classCategory').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <button type="submit"
+          [disabled]="createSchoolClassForm.invalid"
+          mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

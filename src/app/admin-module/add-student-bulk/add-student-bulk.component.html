@@ -1,0 +1,39 @@
+<h1 [ngClass]="['h1']">Add Student(Bulk)</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    Add Students Bulk
+  </li>
+</ul>
+<p>**Upload an excel file in this format</p>
+<p>
+  <a [ngClass]="['anchor']" href="../../../assets/student_list_sample.xlsx" download="">
+    Download Sample
+  </a>
+</p>
+
+<form>
+  <input type="file"
+        #excelFileUpload
+        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+  <p>
+    <button type="button"
+      mat-raised-button color="accent"
+      (click)="excelFileUpload.click()">Upload File</button>
+  </p><br>
+
+  <mat-divider></mat-divider>
+
+  <p>
+    <button (click)="uploadFile()"
+            [disabled]="!excelFileUpload.value"
+            type="button" mat-raised-button
+            color="primary">Submit</button>
+  </p>
+</form>
+
+<div class="form-container" *ngIf="excelFileUpload?.files.length > 0">
+  <app-excel-sheet-preview [fileSelector]="excelFileUpload.files[0]"></app-excel-sheet-preview>
+</div>

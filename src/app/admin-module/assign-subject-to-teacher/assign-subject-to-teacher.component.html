@@ -1,0 +1,21 @@
+<h1 class="h1">Select Teacher(s) For This Subject</h1>
+<div class="form-container">
+  <form>
+    <mat-selection-list #shoes (selectionChange)="onGroupsChange(shoes.selectedOptions.selected)">
+      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        {{shoe}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div style="padding-left: 20px;" *ngIf="shoes.selectedOptions.selected.length > 0">
+      <mat-divider></mat-divider>
+      <br />
+      <p>You've Selected</p>
+      <p *ngFor="let sh of shoes.selectedOptions.selected">{{ sh.value }}</p>
+    </div>
+
+    <p>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

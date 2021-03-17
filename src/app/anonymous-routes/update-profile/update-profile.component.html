@@ -1,0 +1,69 @@
+<h1 class="h1">Update Profile</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/']">Home</a>
+  </li>
+  <li>Update Profile</li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="updateProfileForm" (ngSubmit)="submitForm()">
+    <div class="preview-image-container" *ngIf="passportUrl">
+      <input type="file" accept="image/*" #uploadBtn (change)="onImagePicked($event)"/>
+      <img [src]="passportUrl" [alt]="fullName"/>
+      <button type="button" mat-raised-button color="accent" (click)="uploadBtn.click()">
+        <mat-icon>add_a_photo</mat-icon> Select Image
+      </button>
+    </div>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [formControlName]="'firstName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateProfileForm.get('firstName').touched
+                                        && updateProfileForm.get('firstName').invalid">
+          <span *ngIf="updateProfileForm.get('firstName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControlName]="'lastName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateProfileForm.get('lastName').touched
+                                        && updateProfileForm.get('lastName').invalid">
+          <span *ngIf="updateProfileForm.get('lastName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" [formControlName]="'username'">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateProfileForm.get('username').touched
+                                        && updateProfileForm.get('username').invalid">
+          <span *ngIf="updateProfileForm.get('username').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="updateProfileForm.get('username').errors['email']">
+            This field must be a valid email address
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit"
+          [disabled]="updateProfileForm.invalid"
+          mat-raised-button
+          color="primary">Submit</button>
+    </p>
+  </form>
+</div>

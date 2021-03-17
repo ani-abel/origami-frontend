@@ -1,0 +1,60 @@
+<h1 class="h1">Exam</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/student', 'exam']">My Exams</a>
+  </li>
+  <li>Exam</li>
+</ul>
+
+<main *ngIf="!examNotDue; else upcomingEventTemplate">
+  <section *ngIf="attachedExamFileURL; else defaultTemplate">
+    <div class="p-date">
+      <button color="accent" mat-raised-button (click)="openBottomSheet()">Details</button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <app-pdf-document-preview [fileURL]="attachedExamFileURL"></app-pdf-document-preview>
+
+    <!-- Display if submission does not exist -->
+    <div class="p-date" *ngIf="!attachedExamSubmissionFileURL">
+      <button mat-raised-button color="accent" (click)="toggleTakeExam()">
+        <mat-icon>schedule</mat-icon> Take Exam</button>
+    </div>
+  </section>
+
+  <ng-template #defaultTemplate>
+    <app-no-content-found></app-no-content-found>
+  </ng-template>
+
+  <!-- Component for viewing ca-tests solutions that have already been submitted -->
+  <section *ngIf="attachedExamSubmissionFileURL">
+    <mat-divider></mat-divider>
+    <br />
+
+    <h2 class="h1">Submission</h2>
+
+    <app-pdf-document-preview [fileURL]="attachedExamSubmissionFileURL"></app-pdf-document-preview>
+  </section>
+
+  <!-- Component for adding Exam submissions -->
+  <section *ngIf="takeExam">
+    <mat-divider></mat-divider>
+    <br />
+
+    <h2 class="h1">Take Exam</h2>
+    <app-exam-submission
+      (examSubmitted)="examSubmitted($event)"
+      [examId]="examId"
+      [allocatedTime]="allocatedTimeForExam"></app-exam-submission>
+    <br />
+  </section>
+</main>
+
+<ng-template #upcomingEventTemplate>
+  <app-upcoming-event-date [eventStartDate]="examStartDate"></app-upcoming-event-date>
+</ng-template>

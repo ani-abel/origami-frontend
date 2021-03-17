@@ -1,0 +1,40 @@
+<h1 class="h1">Select Class For This Teacher</h1>
+<!-- Breadcrumbs (Begin) -->
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/admin', 'manage-teachers']">Manage Teachers</a>
+  </li>
+  <li>
+    Assign Teacher To Class
+  </li>
+</ul>
+<!-- Breadcrumbs (Begin) -->
+<div class="form-container">
+  <form>
+    <mat-selection-list [multiple]="false" #classes>
+      <mat-list-option *ngFor="let schoolClass of (classList$ | async)" [value]="schoolClass.Id">
+        {{ schoolClass.Name | uppercase }}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div style="padding-left: 20px;" *ngIf="classes.selectedOptions.selected.length > 0">
+      <mat-divider></mat-divider>
+      <br />
+      <p>You've Selected</p>
+      <p *ngFor="let schoolClass of classes.selectedOptions.selected">
+        {{ classes.selectedOptions.selected.length }} Class(es)
+      </p>
+    </div>
+
+    <p>
+      <button type="button"
+        [disabled]="classes.selectedOptions.selected?.length < 1"
+        (click)="assignClassToTeacher(classes.selectedOptions.selected[0].value)"
+        mat-raised-button
+        color="primary">Submit</button>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+.chart-container {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+
+.chart-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* display: inline-grid; */
+  /* flex-grow: 1; */
+  /* margin: 15px; */
+}
+
+.chart-widget .mat-card {
+  width: 100%;
+}
+
+h1 {
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  color: #3F51B5;
+  text-shadow: 2px 2px #dddddd;
+  font-family: cursive;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  width: 70vw;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 35px;
+  }
+}
+

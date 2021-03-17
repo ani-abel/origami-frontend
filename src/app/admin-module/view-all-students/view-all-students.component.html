@@ -1,0 +1,73 @@
+<h1 class="h1">Student List</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    Students
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="subjectSelectionForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'">
+            <mat-option *ngFor="let subject of (subjectList$ | async)"
+              [value]="subject.Id">
+              {{ subject.Name }}({{ subject.ClassCategory }})
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="subjectSelectionForm.get('subject').touched
+                                        && subjectSelectionForm.get('subject').invalid">
+          <span *ngIf="subjectSelectionForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <button type="submit"
+        [disabled]="subjectSelectionForm.invalid"
+        mat-raised-button
+        color="primary">Submit</button>
+    </p>
+  </form>
+
+  <div *ngIf="subjectSelectionForm.valid && dataSource?.length > 0">
+    <mat-divider></mat-divider>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.Name }} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Username">
+      <th mat-header-cell *matHeaderCellDef> Username</th>
+      <td mat-cell *matCellDef="let element"> {{ element.Username }} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Class">
+      <th mat-header-cell *matHeaderCellDef> Class </th>
+      <td mat-cell *matCellDef="let element"> {{element.SchoolClass}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  </div>
+</div>
+
+<app-no-content-found *ngIf="subjectSelectionForm.get('subject').value && dataSource?.length < 1"></app-no-content-found>
+
+<app-no-input-selected *ngIf="!subjectSelectionForm.get('subject').value"></app-no-input-selected>

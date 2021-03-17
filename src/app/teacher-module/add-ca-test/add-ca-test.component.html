@@ -1,0 +1,128 @@
+<h1 class="h1">Create CA Test</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    Add CA Test
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="addCATestForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+        <mat-select [formControlName]="'subject'">
+          <mat-option *ngFor="let subj of (subjectList$ | async)"
+            [value]="subj.Id">
+            {{subj.Name }}({{ subj.ClassCategory }})
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('subject').touched
+                                        && addCATestForm.get('subject').invalid">
+          <span *ngIf="addCATestForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>CA Type</mat-label>
+          <mat-select [formControlName]="'caType'">
+            <mat-option *ngFor="let caType of (caTypeList$ | async)" [value]="caType.Value">
+            {{caType.Name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('caType').touched
+                                        && addCATestForm.get('caType').invalid">
+          <span *ngIf="addCATestForm.get('caType').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Allocated Time</mat-label>
+          <mat-select [formControlName]="'allocatedTime'">
+            <mat-option *ngFor="let allocatedTime of (allocatedTimes$ | async)"
+              [value]="allocatedTime.Value">
+            {{allocatedTime.Name}}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('allocatedTime').touched
+                                        && addCATestForm.get('allocatedTime').invalid">
+          <span *ngIf="addCATestForm.get('allocatedTime').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput
+          [min]="minDate"
+          [matDatepickerFilter]="myFilter"
+          [matDatepicker]="picker"
+          [formControlName]="'startDate'" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('startDate').touched
+          && addCATestForm.get('startDate').invalid">
+          <span *ngIf="addCATestForm.get('startDate').errors['required']">
+          This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Time</mat-label>
+        <input matInput placeholder="Time" [formControlName]="'startTime'">
+        <mat-icon matSuffix>access_time</mat-icon>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('startTime').touched
+          && addCATestForm.get('startTime').invalid">
+          <span *ngIf="addCATestForm.get('startTime').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="addCATestForm.get('startTime').errors['pattern']">
+            This field must match this pattern I.E 11:40AM
+          </span>
+      </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Total Expected Score</mat-label>
+        <input matInput
+            placeholder="Total Expected Score"
+            [formControlName]="'totalExpectedScore'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="addCATestForm.get('totalExpectedScore').touched
+          && addCATestForm.get('totalExpectedScore').invalid">
+          <span *ngIf="addCATestForm.get('totalExpectedScore').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="addCATestForm.get('totalExpectedScore').errors['pattern']">
+            This field must be a number
+          </span>
+      </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+          [disabled]="addCATestForm.invalid"
+          mat-raised-button color="primary">Post</button>
+    </p>
+  </form>
+</div>

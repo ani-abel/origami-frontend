@@ -1,0 +1,12 @@
+img {
+  min-width: 400px;
+  min-height: 400px;
+}
+
+
+@media (max-width: 600px) {
+  img {
+    width: 90vw;
+    height: 90vh;
+  }
+}

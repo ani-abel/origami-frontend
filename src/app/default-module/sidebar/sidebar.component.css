@@ -1,0 +1,32 @@
+:host .mat-icon {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 0 20px 20px 20px;
+}
+
+.profile-card img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.active-link {
+  color: #000;
+  background-color: #fff;
+}
+
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.mat-expansion-panel {
+  box-shadow: none;
+  background: whitesmoke;
+  margin-bottom: 10px;
+}

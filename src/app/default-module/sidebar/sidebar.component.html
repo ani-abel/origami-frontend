@@ -1,0 +1,421 @@
+<mat-nav-list>
+  <div class="profile-card">
+    <div class="header">
+      <h2>{{ firstName | uppercase }} {{ lastName | uppercase }}</h2>
+    </div>
+    <img [ngClass]="['box-shadow']" [src]="profileImageURL" [alt]="fullName"/>
+  </div>
+
+  <!-- Nav List section for ADMIN -->
+  <ng-container *ngIf="authSrv.getRole() && authSrv.getRole() === 'ADMIN'">
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Admin</h2>
+    <a mat-list-item
+      [routerLink]="['/admin']"
+      [routerLinkActive]="'active-link'">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </a>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>class</mat-icon>
+            Manage School Class
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'school-class']">
+          <mat-icon>search</mat-icon>
+          <span>View Classes</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'school-class', 'add-class']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Class</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'school-class', 'add-class-bulk']">
+          <mat-icon>control_point_duplicate</mat-icon>
+          <span>Add Class Bulk</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>subject</mat-icon>
+            Manage Subjects
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'subject']">
+          <mat-icon>search</mat-icon>
+          <span>View Subjects</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'subject', 'add-subject']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Subject</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'subject', 'add-subject-bulk']">
+          <mat-icon>control_point_duplicate</mat-icon>
+          <span>Add Subject Bulk</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>supervised_user_circle</mat-icon>
+            Manage Teachers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+        [routerLinkActive]="'active-link'"
+        [routerLink]="['/admin', 'manage-teachers']">
+        <mat-icon>search</mat-icon>
+        <span>View Teachers</span>
+      </a>
+      <a mat-menu-item
+        [routerLinkActive]="'active-link'"
+        [routerLink]="['/admin', 'manage-teachers', 'add-teacher']">
+        <mat-icon>control_point</mat-icon>
+        <span>Add Teacher</span>
+      </a>
+      <a mat-menu-item
+        [routerLinkActive]="'active-link'"
+        [routerLink]="['/admin', 'manage-teachers', 'add-teacher-bulk']">
+        <mat-icon>control_point_duplicate</mat-icon>
+        <span>Add Teacher Bulk</span>
+      </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>supervised_user_circle</mat-icon>
+            Manage Students
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'manage-students']">
+          <mat-icon>search</mat-icon>
+          <span>View Students</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'manage-students', 'add-student']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Student</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/admin', 'manage-students', 'add-student-bulk']">
+          <mat-icon>control_point_duplicate</mat-icon>
+          <span>Add Student Bulk</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </ng-container>
+
+  <!-- Nav List section for TEACHER -->
+  <ng-container *ngIf="authSrv.getRole() && authSrv.getRole() === 'TEACHER'">
+    <mat-divider></mat-divider>
+    <h2 matSubheader>Teacher</h2>
+    <a mat-list-item
+      [routerLink]="['/teacher']"
+      [routerLinkActive]="'active-link'">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </a>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>meeting_room</mat-icon>
+            Virtual Meetings
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'virtual-meeting']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Virtual Meeting</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'virtual-meeting', 'view-virtual-meetings']">
+          <mat-icon>search</mat-icon>
+          <span>View Virtual Meetings</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>topic</mat-icon>
+            Manage Topics
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-topic']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Topic</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-topic', 'view-topics']">
+          <mat-icon>search</mat-icon>
+          <span>View Topics</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>assignment</mat-icon>
+            Manage Assignments
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-assignment']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Assignment</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-assignment', 'view-assignments']">
+          <mat-icon>search</mat-icon>
+          <span>View Assignments</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>speaker_notes</mat-icon>
+            Manage Exams
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-exam']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Exam</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-exam', 'view-exams']">
+          <mat-icon>search</mat-icon>
+          <span>View Exams</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-exam', 'view-ongoing-exams']">
+          <mat-icon>loop</mat-icon>
+          <span>View Ongoing Exams</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>insert_comment</mat-icon>
+            Manage CA Tests
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-test']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add CA Test</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-test', 'view-tests']">
+          <mat-icon>search</mat-icon>
+          <span>View CA Tests</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-test', 'view-ongoing-tests']">
+          <mat-icon>loop</mat-icon>
+          <span>View Ongoing Tests</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>library_books</mat-icon>
+            Manage Notes
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-note']">
+          <mat-icon>control_point</mat-icon>
+          <span>Add Note</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/teacher', 'manage-note', 'view-notes']">
+          <mat-icon>search</mat-icon>
+          <span>View Notes</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+
+  <!-- Nav List section for STUDENTS -->
+  <ng-container *ngIf="authSrv.getRole() && authSrv.getRole() === 'STUDENT'">
+    <mat-divider></mat-divider>
+    <h2 matSubheader>Student</h2>
+    <a mat-list-item
+      [routerLink]="['/student']"
+      [routerLinkActive]="'active-link'">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </a>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>assignment</mat-icon>
+            Assignment
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'assignment']">
+          <mat-icon>list</mat-icon>
+          <span>My Assigments</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>insert_comment</mat-icon>
+            CA Tests
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'ca-test']">
+          <mat-icon>list</mat-icon>
+          <span>My CA Tests</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>insert_comment</mat-icon>
+            Exam
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'exam']">
+          <mat-icon>list</mat-icon>
+          <span>My Exams</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>subject</mat-icon>
+            Subject
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'subject']">
+          <mat-icon>list</mat-icon>
+          <span>My Subjects</span>
+        </a>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'subject', 'enroll-for-subject']">
+          <mat-icon>how_to_reg</mat-icon>
+          <span>Subject Enrollment</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>collections</mat-icon>
+           Note
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/student', 'note']">
+          <mat-icon>menu_book</mat-icon>
+          <span>My Notes</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+
+  <ng-container *ngIf="authSrv.getRole() && authSrv.getRole() !== 'ADMIN'">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>message</mat-icon>
+            Chat Rooms
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-menu-item
+          [routerLinkActive]="'active-link'"
+          [routerLink]="['/anonymous', 'chat-rooms']">
+          <mat-icon>room_preferences</mat-icon>
+          <span>My Chat Rooms</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+</mat-nav-list>

@@ -1,0 +1,55 @@
+<h1 class="h1">Update Class</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/admin', 'school-class']">View Classes</a>
+  </li>
+  <li>
+    Update Class
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="updateSchoolClassForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class Name</mat-label>
+        <input matInput placeholder="Username" [formControlName]="'className'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="updateSchoolClassForm.get('className').touched
+                                        && updateSchoolClassForm.get('className').invalid">
+          <span *ngIf="updateSchoolClassForm.get('className').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="updateSchoolClassForm.get('className').errors['minLength']">
+            This field must be > 3 characters
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class Category</mat-label>
+          <mat-select [formControlName]="'classCategory'">
+            <mat-option *ngFor="let category of (classCategorySL$ | async)"
+              [value]="category.Value">
+              {{category.Name }}
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="updateSchoolClassForm.get('classCategory').touched
+                                        && updateSchoolClassForm.get('classCategory').invalid">
+          <span *ngIf="updateSchoolClassForm.get('classCategory').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <button type="submit"
+          [disabled]="updateSchoolClassForm.invalid"
+          mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

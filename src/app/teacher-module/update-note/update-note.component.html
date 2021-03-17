@@ -1,0 +1,59 @@
+<h1 class="h1">Update Note</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-note', 'view-notes']">
+      View Notes
+    </a>
+  </li>
+  <li>Update Note</li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="updateNoteForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'" (selectionChange)="handleChange($event)">
+            <mat-option *ngFor="let subject of (subjectList$ | async)"
+            [value]="subject.Id">
+            {{ subject.Name }}({{ subject.ClassCategory }})
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="updateNoteForm.get('subject').touched
+                                        && updateNoteForm.get('subject').invalid">
+          <span *ngIf="updateNoteForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Topic</mat-label>
+          <mat-select [formControlName]="'subjectTopic'">
+            <mat-option *ngFor="let topic of (topics$ | async)"
+              [value]="topic.Id">
+              {{ topic.Title }}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="updateNoteForm.get('subjectTopic').touched
+                                        && updateNoteForm.get('subjectTopic').invalid">
+          <span *ngIf="updateNoteForm.get('subjectTopic').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+          [disabled]="updateNoteForm.invalid"
+          mat-raised-button color="primary">Post</button>
+    </p>
+  </form>
+</div>

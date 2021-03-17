@@ -1,0 +1,55 @@
+<h1 class="h1">Add Note</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>Add Note</li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="addNoteForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+          <mat-select [formControlName]="'subject'"
+            (selectionChange)="handleChange($event)">
+            <mat-option *ngFor="let subject of (subjectList$ | async)"
+            [value]="subject.Id">
+            {{ subject.Name }}({{ subject.ClassCategory }})
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addNoteForm.get('subject').touched
+                                        && addNoteForm.get('subject').invalid">
+          <span *ngIf="addNoteForm.get('subject').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Topic</mat-label>
+          <mat-select [formControlName]="'subjectTopic'">
+            <mat-option *ngFor="let topic of (topics$ | async)"
+              [value]="topic.Id">
+              {{ topic.Title }}
+          </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="addNoteForm.get('subjectTopic').touched
+                                        && addNoteForm.get('subjectTopic').invalid">
+          <span *ngIf="addNoteForm.get('subjectTopic').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <app-ck-editor (textareaInputEvent)="handleInput($event)"></app-ck-editor>
+
+    <p>
+      <button type="submit"
+          [disabled]="addNoteForm.invalid"
+          mat-raised-button color="primary">Post</button>
+    </p>
+  </form>
+</div>

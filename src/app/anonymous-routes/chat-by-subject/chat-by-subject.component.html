@@ -1,0 +1,85 @@
+<app-chat-participant-sidebar
+    #chatParticipantSidebar
+    [chatType]="chatType"
+    [roomId]="subjectId"
+    *ngIf="toggleSidebar"
+    (toggleSidebar)="handleSidebarToggle($event)">
+  </app-chat-participant-sidebar>
+
+<section class="msger">
+  <header class="msger-header">
+    <div class="msger-header-title">
+      <mat-icon>chat</mat-icon> {{ (roomNameAsync$ | async) }}
+    </div>
+    <div class="msger-header-options">
+      <span #openSidebarOnClick (click)="openSidebar()"><mat-icon>menu</mat-icon></span>
+    </div>
+  </header>
+
+  <main class="msger-chat" #messageContainer>
+    <section *ngIf="(messagesAsync$ | async)?.length > 0; else defaultTemplate">
+      <div *ngFor="let message of (messagesAsync$ | async)">
+        <div class="msg left-msg" *ngIf="message.PersonId !== userId; else defaultChatWidget">
+          <div
+           class="msg-img"
+           [style]="returnBgImage(message.ProfileImage)"
+          ></div>
+
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">{{ message.Username }}</div>
+              <div class="msg-info-time">{{ message.DateCreated | date : 'medium' }}</div>
+            </div>
+
+            <div class="msg-text">
+              {{ message.Message }}
+            </div>
+          </div>
+        </div>
+
+        <ng-template #defaultChatWidget>
+          <div class="msg right-msg">
+            <div
+             class="msg-img"
+             [style]="returnBgImage(message.ProfileImage)"
+            ></div>
+
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">You</div>
+                <div class="msg-info-time">{{ message.DateCreated | date : 'medium' }}</div>
+              </div>
+
+              <div class="msg-text">
+                {{ message.Message }}
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="msg-center text-center" #userIsTyping *ngIf="temporaryMessage">
+        <span class="box-shadow">{{ temporaryMessage }}</span>
+      </div>
+    </section>
+
+   <ng-template #defaultTemplate>
+    <section [ngClass]="['full-width', 'box-shadow']">
+      <img src="../../../assets/undraw_not_found_60pq (1).svg" />
+      <div>
+        <h2 [ngClass]="['h2', 'text-center']">No Content Found</h2>
+      </div>
+    </section>
+   </ng-template>
+  </main>
+
+  <form [ngClass]="['msger-inputarea']" [formGroup]="sendMessageForm" (ngSubmit)="submitForm()">
+    <textarea [formControlName]="'message'"
+       [ngClass]="['msger-input']"
+       (input)="handleInput()"
+        placeholder="Enter your message..." ></textarea>
+    <button type="submit"
+      class="msger-send-btn"
+      [disabled]="sendMessageForm.invalid">Send</button>
+  </form>
+</section>

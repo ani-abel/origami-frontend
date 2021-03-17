@@ -1,0 +1,38 @@
+<h1 class="h1">Select Subjects For This Teacher</h1>
+<!-- Breadcrumbs (Begin) -->
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/admin', 'manage-teachers']">Manage Teachers</a>
+  </li>
+  <li>
+    Assign Teacher To Subjects
+  </li>
+</ul>
+<!-- Breadcrumbs (Begin) -->
+<div class="form-container">
+  <form>
+    <mat-selection-list #subjects (selectionChange)="onGroupsChange(subjects.selectedOptions.selected)">
+      <mat-list-option *ngFor="let subject of (subjectList$ | async)" [value]="subject.Id">
+        {{subject.Name}}({{ subject.ClassCategory }})
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div style="padding-left: 20px;" *ngIf="subjects.selectedOptions.selected.length > 0">
+      <mat-divider></mat-divider>
+      <br />
+      <p>You've Selected</p>
+      <p>{{ subjects.selectedOptions.selected?.length }} subject(s) selected</p>
+    </div>
+
+    <p>
+      <button type="button"
+        [disabled]="subjects.selectedOptions.selected?.length < 1"
+        mat-raised-button
+        (click)="submitForm()"
+        color="primary">Submit</button>
+    </p>
+  </form>
+</div>

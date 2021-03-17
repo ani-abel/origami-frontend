@@ -1,0 +1,55 @@
+:host {
+  width: 100%;
+}
+
+iframe {
+  width: 100% !important;
+  min-height: 250px !important;
+}
+
+.pdf-viewer-controls {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.pdf-viewer-controls button,
+.pdf-viewer-controls .mat-form-field {
+  display: inline-block;
+}
+
+.pdf-viewer-controls .mat-form-field {
+  width: 20% !important;
+}
+
+.pdf-page-count {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.pdf-page-count p {
+  text-align: center;
+  font-size: 14px;
+}
+
+.pdf-page-count p>span {
+  background: #ddd;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.form-container {
+  width: 70vw;
+  min-height: 250px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    width: 100%;
+  }
+
+  .pdf-viewer-controls .mat-form-field {
+    width: 30% !important;
+  }
+}

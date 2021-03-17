@@ -1,0 +1,76 @@
+<h1 class="h1">Ongoing Exams</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    View Ongoing Exams
+  </li>
+</ul>
+<div class="form-container" *ngIf="dataSource?.length > 0; else defaultTemplate">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="S/N">
+      <th mat-header-cell *matHeaderCellDef> S/N </th>
+      <td mat-cell *matCellDef="let element"> {{element.SerialNumber}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Subject">
+      <th mat-header-cell *matHeaderCellDef> Subject </th>
+      <td mat-cell *matCellDef="let element"> {{element.Subject}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ExamType">
+      <th mat-header-cell *matHeaderCellDef> Exam Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.ExamType}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="DateOfExam">
+      <th mat-header-cell *matHeaderCellDef> Date Of Exam </th>
+      <td mat-cell *matCellDef="let element"> {{element.SelectedDateTime | relativeTime }} </td>
+    </ng-container>
+
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="DateCreated">
+      <th mat-header-cell *matHeaderCellDef> Date Created </th>
+      <td mat-cell *matCellDef="let element"> {{element.DateCreated | relativeTime }} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="TotalMarksExpected">
+      <th mat-header-cell *matHeaderCellDef> Total Marks Expected </th>
+      <td mat-cell *matCellDef="let element">{{ element.TotalExpectedScore }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" [matMenuTriggerFor]="actionMenu">Manage</button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <a [routerLink]="['/teacher', 'manage-exam', 'view-exam-submissions', element.Id]"
+             mat-menu-item>
+              <mat-icon>collections</mat-icon> Submissions
+            </a>
+            <a mat-menu-item
+              [routerLink]="['/teacher', 'manage-exam', 'track-exam-participant', element.Id]">
+              <mat-icon>track_changes</mat-icon> View Participant Tracking
+            </a>
+          </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

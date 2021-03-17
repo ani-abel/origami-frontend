@@ -1,0 +1,29 @@
+<main class="sidebar box-shadow">
+  <div class="sidebar-container">
+    <button mat-raised-button color="accent" (click)="closeSidebar()">Close</button>
+    <div [ngClass]="['participants-list-container']">
+      <div *ngFor="let roomMember of (roomMembers$ | async)">
+        <div [ngClass]="['participant-widget', 'box-shadow']" *ngIf="(activeUsersAsync$ | async)?.includes(roomMember.Id); else defaultTemplate">
+          <img [ngClass]="['display-inline-block']"
+          [src]="roomMember.PassportUrl" />
+          &nbsp;
+          <h2 [ngClass]="['display-inline-block', 'font-weight-300']">
+            {{ roomMember.FirstName }} {{ roomMember.LastName }}
+            <span [ngClass]="['active-user']">(Active)</span>
+          </h2>
+        </div>
+
+        <ng-template #defaultTemplate>
+          <div [ngClass]="['participant-widget', 'box-shadow']">
+            <img [ngClass]="['display-inline-block']"
+                 [src]="roomMember.PassportUrl" />
+            &nbsp;
+            <h2 [ngClass]="['display-inline-block', 'font-weight-300']">
+              {{ roomMember.FirstName }} {{ roomMember.LastName }}<span [ngClass]="['inactive-user']">(Inactive)</span>
+            </h2>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,62 @@
+<h1 class="h1">CA Test Submissions</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-test', 'view-tests']">
+      View CA Tests
+    </a>
+  </li>
+  <li>
+    View Test Submissions
+  </li>
+</ul>
+<div class="form-container" *ngIf="dataSource?.length > 0; else defaultTemplate">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="S/N">
+      <th mat-header-cell *matHeaderCellDef> S/N </th>
+      <td mat-cell *matCellDef="let element"> {{element.SerialNumber}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="DateSubmitted">
+      <th mat-header-cell *matHeaderCellDef> Date Submitted </th>
+      <td mat-cell *matCellDef="let element"> {{element.DateSubmitted | relativeTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" [matMenuTriggerFor]="actionMenu">Manage</button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <a [routerLink]="['/teacher', 'manage-test', 'test-submission-detail', element.Id]"
+             mat-menu-item>
+              <mat-icon>arrow_forward_ios</mat-icon> More
+            </a>
+            <button (click)="openDialog(element.Id, element.TotalExpectedScoreFromExam)" mat-menu-item>
+              <mat-icon>grade</mat-icon> Grade
+          </button>
+          </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

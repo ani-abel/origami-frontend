@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-header {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+app-footer {
+  padding-bottom: 10px;
+}
+
+mat-drawer {
+  width: 350px;
+}
+
+mat-drawer-container {
+  height: 100%;
+  padding-bottom: 50px;
+}
+
+mat-drawer-content {
+  padding: 20px;
+}

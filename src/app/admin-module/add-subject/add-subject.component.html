@@ -1,0 +1,56 @@
+<h1 class="h1">Add Subject</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    Add Subject
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="createSubjectForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Subject Name</mat-label>
+        <input matInput
+            placeholder="Subject Name"
+            [formControlName]="'subjectName'"
+            [pattern]="regExpPattern" />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="createSubjectForm.get('subjectName').touched
+                                        && createSubjectForm.get('subjectName').invalid">
+          <span *ngIf="createSubjectForm.get('subjectName').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="createSubjectForm.get('subjectName').errors['minLength']">
+            This field must be > 3 characters
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class Category</mat-label>
+          <mat-select [formControlName]="'classCategory'">
+            <mat-option *ngFor="let category of (classCategorySL$ | async)"
+              [value]="category.Value">
+              {{category.Name }}
+            </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="createSubjectForm.get('classCategory').touched
+                                        && createSubjectForm.get('classCategory').invalid">
+          <span *ngIf="createSubjectForm.get('classCategory').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <button type="submit"
+              [disabled]="createSubjectForm.invalid"
+              mat-raised-button color="primary">Submit</button>
+    </p>
+  </form>
+</div>

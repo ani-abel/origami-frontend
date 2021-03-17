@@ -1,0 +1,757 @@
+query getClassCategories {
+  getClassCategories {
+    Name,
+    Value
+  }
+}
+
+query getAllActiveSchoolClasses {
+  getAllActiveSchoolClasses {
+    Id,
+    Name,
+    ClassCategory
+  }
+}
+
+query getClassById($payload: String!) {
+  getAClassById(Id: $payload) {
+    Id,
+    Name,
+    ClassCategory
+  }
+}
+
+query getUsersByRole($payload: String!) {
+  getUsersByRole(role: $payload) {
+    Id,
+    FirstName,
+    LastName,
+    Username
+  }
+}
+
+query getAllActiveSubjects {
+  getAllActiveSubjects {
+    Id,
+    Name,
+    ClassCategory
+  }
+}
+
+query getSubjectById($data: String!){
+  getSubjectById(id: $data) {
+    Name,
+    ClassCategory
+  }
+}
+
+query getOrigamiRoles {
+  getOrigamiRoles {
+    Name,
+    Value
+  }
+}
+
+query getActiveClassesForSelectList {
+  getAllActiveSchoolClasses {
+    Id,
+    Name
+  }
+}
+
+query getPersonById($id: String!) {
+  getPersonById(id: $id) {
+    FirstName,
+    LastName,
+    Username
+  }
+}
+
+query getStudentsBySubject($subjectId: String!) {
+  getStudentsBySubject(subjectId: $subjectId) {
+    Id,
+    Subject {
+      Name
+    },
+    Student {
+      Person {
+        Id,
+        FirstName,
+        LastName
+      },
+      SchoolClass {
+        Name
+      }
+    }
+  }
+}
+
+query getProfileImage($userId: String!) {
+  getPersonById(id: $userId) {
+    PassportUrl,
+    FirstName,
+    LastName
+  }
+}
+
+query getSubjectListForTeacher($userId: String!) {
+  getSubjectsAssignedToTeacher(userId: $userId) {
+    Id,
+    Name,
+    ClassCategory
+  }
+}
+
+query getUserProfile {
+  getUserProfile {
+    Id,
+    FirstName,
+    LastName,
+    Username,
+    PassportUrl
+  }
+}
+
+query getSubjectAssignmentsBySubject($subjectId: String!) {
+  getSubjectAssignmentsBySubject(subjectId: $subjectId) {
+    Id,
+    Subject {
+      Name
+    },
+    DateCreated,
+    DueDate,
+    TotalExpectedScore
+  }
+}
+
+query getSubjectAssignmentById($assignmentId: String!) {
+  getSubjectAssignmentById(assignmentId: $assignmentId) {
+    SubjectId,
+    SubjectTopicId,
+    TotalExpectedScore,
+  	DueDate,
+    AttachedFile
+  }
+}
+
+query getAssignmentSubmissions($subjectAssignmentId: String!) {
+  getAssignmentSubmissionsByAssignment(subjectAssignmentId: $subjectAssignmentId) {
+    Id,
+    DateCreated,
+    Student {
+      Person {
+        FirstName,
+        LastName
+      }
+    },
+    SubjectAssignment {
+      TotalExpectedScore,
+      Subject {
+        Name
+      }
+    },
+    SubjectAssignmentScoreList {
+      Id
+    }
+  }
+}
+
+query getAttachedFileFromAssignmentSubmission($submissionId: String!) {
+  getAssignmentSubmissionById(subjectAssignmentSubmissionId: $submissionId) {
+    AttachedFile,
+    SubjectAssignment {
+      TotalExpectedScore
+    },
+    SubjectAssignmentScoreList {
+      Id
+    }
+  }
+}
+
+query getExamTypes {
+  getExamTypes {
+    Name,
+    Value
+  }
+}
+
+query getAllocatedTime {
+  getAllocatedTimeIntervals {
+    Name,
+    Value
+  }
+}
+
+query getCATypes {
+  getContiniousAssesmentTypes {
+    Name,
+    Value
+  }
+}
+
+query getAllOnGoingExams {
+  getAllOnGoingExams {
+    Id,
+    Subject {
+      Name,
+      ClassCategory
+    },
+    SchoolSession {
+      Name
+    }
+    SelectedDateTime,
+    TotalExpectedScore
+  }
+}
+
+query getExamsTeacherCreated {
+  getAllExamsTeacherCreated {
+    Id,
+    Subject,
+    ExamType,
+    SelectedDateTime,
+    TotalExpectedScore,
+    DateCreated,
+    SerialNumber,
+    SchoolSession
+  }
+}
+
+query getExamParticipation($examId: String!) {
+  getExamParticipation(examId: $examId){
+    Id,
+    Person {
+      FirstName,
+      LastName
+    },
+    DateCreated,
+    SubjectExam {
+      Subject {
+        Name
+      },
+      SchoolSession {
+        Name
+      }
+    }
+  }
+}
+
+query getExamParticipationList($examId: String!) {
+  getExamParticipationList(examId: $examId){
+    Id,
+    Person {
+      FirstName,
+      LastName
+    },
+    DateCreated,
+    SubjectExam {
+      SelectedDateTime,
+      Subject {
+        Name
+      }
+      SchoolSession {
+        Name
+      }
+    }
+  }
+}
+
+query getCAParticipation($caId: String!) {
+  getCAParticipation(caId: $caId){
+    Id,
+    Person {
+      FirstName,
+      LastName
+    },
+    DateCreated,
+    SubjectCA {
+      Subject {
+        Name
+      },
+      SchoolSession {
+        Name
+      }
+    }
+  }
+}
+
+query getExamParticipationScreenshots($examParticipationId: String!) {
+  getExamParticipationScreenshots(examParticipationId: $examParticipationId) {
+    Url
+  }
+}
+
+query getCAParticipationScreenshots($caParticipationId: String!) {
+  getCAParticipationScreenshots(caParticipationId: $caParticipationId) {
+    Url
+  }
+}
+
+query getExamSubmissions($examId: String!) {
+  getExamSubmissions(examId: $examId) {
+    Id,
+    Student {
+      Person {
+        FirstName,
+        LastName
+      }
+    },
+    DateCreated,
+    SubjectExam {
+      TotalExpectedScore
+    }
+  }
+}
+
+query getCASubmissions($caId: String!) {
+  getCASubmissions(caId: $caId) {
+    Id,
+    Student {
+      Person {
+        FirstName,
+        LastName
+      }
+    },
+    DateCreated,
+    SubjectCA {
+      TotalExpectedScore
+    }
+  }
+}
+
+query getExamSubmission($examSubmissionId: String!) {
+  getExamSubmission(examSubmissionId: $examSubmissionId) {
+    AttachedFile,
+    SubjectExam {
+      TotalExpectedScore
+    }
+  }
+}
+
+query getCASubmission($caSubmissionId: String!) {
+  getCASubmission(caSubmissionId: $caSubmissionId) {
+    AttachedFile,
+    SubjectCA {
+      TotalExpectedScore
+    }
+  }
+}
+
+query getAllCATestsCreatedByTeacher {
+  getAllCATestsCreatedByTeacher {
+    Id,
+    Subject,
+    CAType,
+    SelectedDateTime,
+    TotalExpectedScore,
+    DateCreated,
+    SerialNumber,
+    SchoolSession
+  }
+}
+
+query getAllOnGoingCATestsCreatedByTeacher {
+   getAllOnGoingCATests {
+    Id,
+    Subject {
+      Name,
+      ClassCategory
+    },
+    SchoolSession {
+      Name
+    }
+    SelectedDateTime,
+    TotalExpectedScore
+  }
+}
+
+query getSubjectNoteById($subjectNoteId: String!) {
+  getASubjectNote(subjectNoteId: $subjectNoteId) {
+    SubjectId,
+    AttachedFile,
+    SubjectTopicId
+  }
+}
+
+query getSubjectNotes($subjectId: String!) {
+  getNotesBySubject(subjectId: $subjectId) {
+    Id,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      Id,
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentAssignmentsBySubject($subjectId: String!) {
+  getAssignmentsBySubject(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentDoneAssignmentsBySubject($subjectId: String!) {
+  getDoneAssignments(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentUndoneAssignmentsBySubject($subjectId: String!) {
+  getUndoneAssignments(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getLatestAssignmentsBySubject($subjectId: String!) {
+  getLatestAssignmentsBySubject(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getAllSubjectsAssignedToStudentForSL {
+  getAllSubjectsAssignedToStudent {
+    Id,
+    Subject {
+      Id,
+      Name,
+      ClassCategory
+    }
+  }
+}
+
+query getMyAssignment($assignmentId: String!) {
+  getAssignment(assignmentId: $assignmentId) {
+    AttachedFile,
+    DateCreated,
+    DueDate,
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentAssignmentSubmission($assignmentId: String!) {
+  getStudentAssignmentSubmission(assignmentId: $assignmentId) {
+    AttachedFile
+  }
+}
+
+query getAssignmentScore($assignmentId: String!) {
+  getAssignmentScore(assignmentId: $assignmentId) {
+    Score,
+    Remark
+  }
+}
+
+query getSubjectNotesForStudent($subjectId: String!) {
+  getSubjectNotes(subjectId: $subjectId) {
+    Id,
+    DateCreated,
+    Subject {
+      Name
+    }
+  }
+}
+
+query getSubjectNoteForStudent($noteId: String!) {
+  getSubjectNote(noteId: $noteId) {
+    AttachedFile,
+    DateCreated,
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getSubjectsAssignedToStudent {
+  getAllSubjectsAssignedToStudent {
+    Subject {
+      Id,
+      Name,
+      DateCreated,
+      ClassCategory
+    }
+  }
+}
+
+query getSubjectStudentShouldEnrollFor {
+  getSubjectStudentShouldEnrollFor {
+    Id,
+    Name,
+    ClassCategory
+  }
+}
+
+query getSubjectAssignmentScoreById($assignmentSubmissionId: String!) {
+  getSubjectAssignmentScoreById(subjectAssignmentSubmissionId: $assignmentSubmissionId) {
+    Score,
+    Remark,
+    SubjectAssignmentSubmission {
+      SubjectAssignment {
+        TotalExpectedScore
+      }
+    }
+  }
+}
+
+query getSubjectCAScoreById($caSubmissionId: String!) {
+  getSubjectCAScoreById(subjectCASubmissionId: $caSubmissionId) {
+    Score,
+    Remark,
+    SubjectCASubmission {
+      SubjectCA {
+        TotalExpectedScore
+      }
+    }
+  }
+}
+
+query getSubjectExamScoreById($examSubmissionId: String!) {
+  getSubjectExamScoreById(subjectExamSubmissionId: $examSubmissionId) {
+    Score,
+    Remark,
+    SubjectExamSubmission {
+      SubjectExam {
+        TotalExpectedScore
+      }
+    }
+  }
+}
+
+query getStudentExamsBySubject($subjectId: String!) {
+  getExamsBySubject(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentUndoneExamsBySubject($subjectId: String!) {
+  getUndoneExams(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentDoneExamsBySubject($subjectId: String!) {
+  getDoneExams(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getMyExam($examId: String!) {
+  getExam(examId: $examId) {
+    AttachedFile,
+    DateCreated,
+    ExamType,
+    AllocatedTime,
+    SelectedDateTime
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getMyExamSubmission($examId: String!) {
+  getUserExamSubmission(examId: $examId) {
+    AttachedFile
+  }
+}
+
+query getMyExamParticipation($examId: String!) {
+   getExamParticipation(examId: $examId) {
+    Id
+  }
+}
+
+query getStudentCATestsBySubject($subjectId: String!) {
+  getCATestsBySubject(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentUndoneCATestsBySubject($subjectId: String!) {
+  getUndoneCATests(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getStudentDoneCATestsBySubject($subjectId: String!) {
+  getDoneCATests(subjectId: $subjectId) {
+    Id,
+    TotalExpectedScore,
+    DateCreated,
+    Subject {
+      Name
+    },
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getMyCATest($caTestId: String!) {
+  getCATest(caTestId: $caTestId) {
+    AttachedFile,
+    DateCreated,
+    ContinousAssesmentType,
+    AllocatedTime,
+    SelectedDateTime
+    Person {
+      FirstName,
+      LastName
+    }
+  }
+}
+
+query getMyCATestSubmission($caTestId: String!) {
+  getUserCATestSubmission(caTestId: $caTestId) {
+    AttachedFile
+  }
+}
+
+query getMyCATestParticipation($caTestId: String!) {
+   getCATestParticipation(caTestId: $caTestId) {
+    Id
+  }
+}
+
+query getChatRoomParticipants($payload:  GetChatRoomParticipantDTO!) {
+  getChatRoomParticipants(payload: $payload) {
+    Id,
+    FirstName,
+    LastName,
+    Role,
+    PassportUrl
+  }
+}
+
+query getUserChatRooms($payload: ChatRoomSelectionDTO!){
+  getUserChatRooms(payload: $payload) {
+    Subjects {
+      Id,
+      Name,
+      ClassCategory
+    },
+    SchoolClasses {
+      Id,
+      Name,
+      ClassCategory
+    }
+  }
+}
+
+query getSubjectTopics($subjectId: String!) {
+  getSubjectTopics(subjectId: $subjectId) {
+    Id,
+    Title
+  }
+}
+
+query getSubjectTopicsBySubjectId($subjectId: String!) {
+  getSubjectTopics(subjectId: $subjectId) {
+    Subject {
+      Name
+    },
+    Person {
+      Id,
+      FirstName,
+      LastName
+    },
+    Id,
+    DateCreated
+  }
+}
+
+query getSubjectTopicById($subjectTopicId: String!) {
+  getSubjectTopic(subjectTopicId: $subjectTopicId) {
+    Title,
+    SubjectId
+  }
+}

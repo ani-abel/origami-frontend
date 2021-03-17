@@ -1,0 +1,30 @@
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-assignment', 'view-assignments']">
+      View Assignments
+    </a>
+  </li>
+  <li>
+    View Assignment Submissions
+  </li>
+  <li>
+    View Assignment Submission Detail
+  </li>
+</ul>
+
+<div class="full-width" *ngIf="!isSubmitted">
+  <a mat-raised-button color="accent" (click)="openDialog()">
+    <mat-icon>grade</mat-icon> Grade
+  </a>
+</div>
+
+<app-pdf-document-preview
+        *ngIf="attachedFileUrl; else defaultTemplate"
+        [fileURL]="attachedFileUrl"></app-pdf-document-preview>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

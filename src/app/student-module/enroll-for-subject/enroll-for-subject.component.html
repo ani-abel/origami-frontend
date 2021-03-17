@@ -1,0 +1,33 @@
+<h1 class="h1">Subject Enrollment</h1>
+
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/student']">Home</a>
+  </li>
+  <li>Enroll For Subject</li>
+</ul>
+
+<main class="form-container" *ngIf="(subjectList$ | async)?.length > 0; else defaultTemplate">
+  <mat-selection-list #subject (selectionChange)="onGroupsChange(subject.selectedOptions.selected)">
+    <mat-list-option *ngFor="let subject of (subjectList$ | async)" [value]="subject.Id">
+      {{subject.Name}}({{ subject.ClassCategory }})
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div style="padding-left: 20px;" *ngIf="subject.selectedOptions.selected.length > 0">
+    <mat-divider></mat-divider>
+    <br />
+    <p>You've Selected {{ subject.selectedOptions.selected.length }} subject{{ subject.selectedOptions.selected.length > 1 ? 's' : '' }}</p>
+  </div>
+
+  <p>
+    <button type="button"
+      (click)="submitForm()"
+      [disabled]="subject.selectedOptions.selected.length < 1"
+      mat-raised-button color="primary">Enroll</button>
+  </p>
+</main>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

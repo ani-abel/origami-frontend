@@ -1,0 +1,74 @@
+<h1 class="h1">Assignment Submissions</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/teacher']">Home</a>
+  </li>
+  <li>
+    <a [routerLink]="['/teacher', 'manage-assignment', 'view-assignments']">
+      View Assignments
+    </a>
+  </li>
+  <li>
+    View Assignment Submissions
+  </li>
+</ul>
+
+<div class="form-container" *ngIf="dataSource?.length > 0; else defaultTemplate">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="S/N">
+      <th mat-header-cell *matHeaderCellDef> S/N </th>
+      <td mat-cell *matCellDef="let element"> {{element.SerialNumber}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="StudentName">
+      <th mat-header-cell *matHeaderCellDef> Student Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.StudentName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Subject">
+      <th mat-header-cell *matHeaderCellDef> Subject </th>
+      <td mat-cell *matCellDef="let element"> {{element.Subject}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="DateSubmitted">
+      <th mat-header-cell *matHeaderCellDef> Date Submitted </th>
+      <td mat-cell *matCellDef="let element"> {{element.DateSubmitted | date : 'medium'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="accent" [matMenuTriggerFor]="actionMenu">Manage</button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <a [routerLink]="['/teacher', 'manage-assignment', 'assigment-submission-detail', element.Id]"
+             mat-menu-item>
+              <mat-icon>arrow_forward_ios</mat-icon> More
+            </a>
+            <button *ngIf="!element.IsSubmitted; else defaultGradeTemplate" (click)="openDialog(element.Id, element.TotalExpectedScoreFromAssignment)" mat-menu-item>
+              <mat-icon>grade</mat-icon> Grade
+            </button>
+            <ng-template #defaultGradeTemplate>
+              <button (click)="openUpdateDialog(element.Id, element.TotalExpectedScoreFromAssignment)" mat-menu-item>
+                <mat-icon>edit</mat-icon> Update Grade
+              </button>
+            </ng-template>
+          </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #defaultTemplate>
+  <app-no-content-found></app-no-content-found>
+</ng-template>

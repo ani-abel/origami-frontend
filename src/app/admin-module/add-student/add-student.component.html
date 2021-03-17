@@ -1,0 +1,81 @@
+<h1 class="h1">Add Student</h1>
+<ul class="breadcrumb">
+  <li>
+    <a [routerLink]="['/admin']">Home</a>
+  </li>
+  <li>
+    Add Students
+  </li>
+</ul>
+<div class="form-container">
+  <form [formGroup]="studentRegistrationForm" (ngSubmit)="submitForm()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [formControlName]="'firstName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="studentRegistrationForm.get('firstName').touched
+                                        && studentRegistrationForm.get('firstName').invalid">
+          <span *ngIf="studentRegistrationForm.get('firstName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControlName]="'lastName'">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-hint class="text-danger" *ngIf="studentRegistrationForm.get('lastName').touched
+                                        && studentRegistrationForm.get('lastName').invalid">
+          <span *ngIf="studentRegistrationForm.get('lastName').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Email(Username)</mat-label>
+        <input matInput placeholder="Email(Username)" [formControlName]="'email'">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint class="text-danger" *ngIf="studentRegistrationForm.get('email').touched
+                                        && studentRegistrationForm.get('email').invalid">
+          <span *ngIf="studentRegistrationForm.get('email').errors['required']">
+            This field is required
+          </span>
+          <span *ngIf="studentRegistrationForm.get('email').errors['email']">
+            This field must be a valid Email address
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Class</mat-label>
+        <mat-select  [formControlName]="'schoolClass'">
+          <mat-option *ngFor="let class of (activeClassesSL$ | async)"
+            [value]="class.Id">
+            {{class.Name }}
+        </mat-option>
+        </mat-select>
+        <mat-hint class="text-danger" *ngIf="studentRegistrationForm.get('schoolClass').touched
+                                        && studentRegistrationForm.get('schoolClass').invalid">
+          <span *ngIf="studentRegistrationForm.get('schoolClass').errors['required']">
+            This field is required
+          </span>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <button type="submit"
+          [disabled]="studentRegistrationForm.invalid"
+          mat-raised-button
+          color="primary">Submit</button>
+    </p>
+  </form>
+</div>

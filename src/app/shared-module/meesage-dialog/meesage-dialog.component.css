@@ -1,0 +1,10 @@
+h2 {
+  font-size: 22px;
+  color: #3F51B5;
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 18px;
+  }
+}
